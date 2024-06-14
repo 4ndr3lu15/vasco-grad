@@ -1,4 +1,4 @@
-![VascoGrad](images/vulture.jpg)
+![VascoGrad](images/vascograd.png)
 
 ---
 
