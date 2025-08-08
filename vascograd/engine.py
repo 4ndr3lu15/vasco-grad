@@ -47,7 +47,8 @@ class Value:
         out = Value(self.data**other, (self,), f'**{other}')
 
         def _backward():
-            self.grad += other * self.data ** (other - 1)
+            # Chain rule: d(self**other)/dself = other * self**(other-1) * out.grad
+            self.grad += other * self.data ** (other - 1) * out.grad
         out._backward = _backward
 
         return out
@@ -56,7 +57,8 @@ class Value:
         return self * other**-1
 
     def __rtruediv__(self, other):
-        return self * other**-1
+        # compute other / self
+        return Value(other) * self**-1
 
     def __neg__(self):
         return self * -1
